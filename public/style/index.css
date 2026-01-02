@@ -1,0 +1,352 @@
+body {
+    background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100dvh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+}
+
+.garage {
+    width: 100vw;
+    height: 100dvh;
+    padding-top: 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.garage--cache {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+.garage--visible {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 1s ease, transform 1s ease;
+    pointer-events: auto;
+}
+
+.garage__drapeau {
+    width: 140px;
+    height: auto;
+    border: 4px solid #000;
+    margin-bottom: 15px;
+    pointer-events: auto;
+}
+
+.garage__voiture {
+    max-width: 100%;
+    width: 50vw;
+    margin-top: auto;
+    pointer-events: auto;
+}
+
+.panneau-titre {
+    position: relative;
+    background-image: url('../img/panneau_titre.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 5px solid #000;
+    border-radius: 60px;
+    padding: 12px 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.panneau-titre__nom {
+    color: #A5B5FF;
+    -webkit-text-stroke: 1.5px #002FFF;
+    font-size: 3rem;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.panneau-titre__date {
+    position: absolute;
+    left: -30px;
+    bottom: -10px;
+    background-image: url('../img/panneau.png');
+    background-size: cover;
+    background-position: center;
+    padding: 3px 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transform: rotate(12deg);
+}
+
+.navigation__fleche {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #A5B5FF;
+    -webkit-text-stroke: 3px #002FFF;
+    font-size: 6rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.navigation__fleche--gauche {
+    left: 30px;
+}
+
+.navigation__fleche--droite {
+    right: 30px;
+}
+
+.navigation__fleche:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.ecran-accueil {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    z-index: 100;
+    background-image: url('../img/background_landing.jpg');
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1s ease;
+}
+
+.ecran-accueil__porte-cliquable {
+    position: absolute;
+    left: 35.9%;
+    top: 57.5%;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.ecran-accueil__porte-cliquable img {
+    height: 40lvh;
+    width: 30.5vw;
+    object-fit: cover;
+    transition: transform 1s;
+}
+
+.ecran-accueil--ouvert .ecran-accueil__porte-cliquable img {
+    transform: translateY(-100%);
+}
+
+.popup-info {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: white;
+    padding: 20px;
+    width: 50vw;
+    height: 50lvh;
+    max-height: 100%;
+    max-width: 100%;
+    overflow-y: auto;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    text-align: center;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-info--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-info__titre {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.moteur-visuel {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 8px;
+    height: 60px;
+    margin: 0 auto;
+    background-image: url(../img/tete_cylindre.png);
+    background-size: cover;
+    background-position: center;
+    padding: 5px;
+    width: fit-content;
+}
+
+.moteur-visuel__piston {
+    width: 15px;
+    height: 40px;
+    background-image: url(../img/piston.png);
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+    animation: mouvementPiston 0.6s infinite ease-in-out;
+}
+
+@keyframes mouvementPiston {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.cylindree-visuel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.cylindree-svg {
+    background: transparent;
+    display: block;
+    margin: 0 auto;
+}
+
+.cylindree-svg__barre {
+    transition: width 0.5s ease;
+}
+
+.cylindree-valeur {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.compteur {
+    position: relative;
+    width: 70px;
+    height: 65px;
+    max-width: 100%;
+    max-height: 100%;
+    border-bottom: none;
+    background-image: url(../img/compteur.png);
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+}
+
+.compteur__aiguille {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    height: 25px;
+    background: red;
+    transform-origin: center top;
+    transition: transform 0.5s ease-out;
+    z-index: 2;
+}
+
+.compteur__valeur {
+    color: white;
+    position: absolute;
+    bottom: 2px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 3;
+}
+
+.piste {
+    width: 100%;
+    height: 12px;
+    background: #333;
+    border: 2px solid #000;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.piste__marqueur {
+    position: absolute;
+    top: 1px;
+    width: 10px;
+    height: 10px;
+    background: #002FFF;
+    border-radius: 50%;
+    transition: left 0.5s ease-out;
+    box-shadow: 0 0 5px cyan;
+}
+
+.reservoir {
+    width: 50px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    background-image: url(../img/gas.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.reservoir__jauge {
+    width: 40px;
+    height: 44px;
+    background: black;
+    position: relative;
+    border-radius: 6px;
+    margin: auto 0 2px 0;
+}
+
+.reservoir__liquide {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 70%;
+    background: #ECA927;
+    transition: height 0.5s ease;
+}
+
+.reservoir__texte {
+    color: white;
+}
+
+.balance {
+    width: 100%;
+    background: #ccc;
+    height: 20px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.balance__barre {
+    height: 100%;
+    background: #555;
+    color: #fff;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition: width 0.5s ease;
+}
