@@ -35,17 +35,9 @@ body {
     pointer-events: auto;
 }
 
-.garage__drapeau {
-    width: 140px;
-    height: auto;
-    border: 4px solid #000;
-    margin-bottom: 15px;
-    pointer-events: auto;
-}
-
 .garage__voiture {
     max-width: 100%;
-    width: 50vw;
+    width: 55lvw;
     margin-top: auto;
     pointer-events: auto;
 }
@@ -55,32 +47,48 @@ body {
     background-image: url('../img/panneau_titre.jpg');
     background-size: cover;
     background-position: center;
-    border: 5px solid #000;
-    border-radius: 60px;
+    border: 7px solid #bd1111;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px black;
     padding: 12px 60px;
     display: flex;
     justify-content: center;
-    align-items: center;
     pointer-events: auto;
+    margin: 40px;
+    max-width: 100%;
 }
 
+/* white space nowrap me permet n'éviter un retour
+à la ligne automatique à contrario, plus bas pour le responsive
+du mobile je l'utilise mais pour wrap le texte :) */
 .panneau-titre__nom {
-    color: #A5B5FF;
-    -webkit-text-stroke: 1.5px #002FFF;
+    color: black;
+    opacity: 0.9;
     font-size: 3rem;
     margin: 0;
     white-space: nowrap;
 }
 
+.panneau__drapeau {
+    position: absolute;
+    top: 85px;
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    pointer-events: auto;
+    z-index: -1;
+}
+
 .panneau-titre__date {
     position: absolute;
-    left: -30px;
+    left: -40px;
     bottom: -10px;
     background-image: url('../img/panneau.png');
     background-size: cover;
     background-position: center;
-    padding: 3px 10px;
-    font-size: 0.9rem;
+    padding: 3px 15px;
+    font-size: 1.1rem;
     font-weight: bold;
     transform: rotate(12deg);
 }
@@ -91,31 +99,59 @@ body {
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: #A5B5FF;
-    -webkit-text-stroke: 3px #002FFF;
-    font-size: 6rem;
     cursor: pointer;
     z-index: 10;
+    max-width: 100%;
+    padding: 0;
+}
+
+/* pourquoi plusieurs drop shadow ? et bien pour les additioner
+et donner une sorte d'intensité de plus en plus visible à nos 
+clignotants ! */
+.navigation__fleche svg {
+    width: 100px;
+    height: auto;
+    fill: #39FF14;
+    stroke: #39FF14;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 1px #39FF14) drop-shadow(0 0 3px #39FF14) drop-shadow(0 0 5px #39FF14) drop-shadow(0 0 10px #21990c);
+    transition: all 0.3s ease;
 }
 
 .navigation__fleche--gauche {
-    left: 30px;
+    left: 50px;
 }
 
 .navigation__fleche--droite {
-    right: 30px;
+    right: 50px;
 }
 
-.navigation__fleche:hover {
-    transform: translateY(-50%) scale(1.1);
+.navigation__fleche:hover svg {
+    animation: clignotant 1s infinite;
+}
+
+@keyframes clignotant {
+
+    0%,
+    100% {
+        fill: #333;
+        stroke: none;
+        filter: none;
+    }
+
+    50% {
+        fill: #39FF14;
+        stroke: #39FF14;
+        stroke-width: 2px;
+        filter: drop-shadow(0 0 1px #39FF14) drop-shadow(0 0 3px #39FF14) drop-shadow(0 0 5px #39FF14) drop-shadow(0 0 10px #21990c);
+    }
 }
 
 .ecran-accueil {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100vw;
-    height: 100dvh;
+    height: 100lvh;
     z-index: 100;
     background-image: url('../img/background_landing.jpg');
     background-size: cover;
@@ -123,18 +159,24 @@ body {
     transition: opacity 1s ease;
 }
 
+/* la technique de centrer un élément absolu avec margin-inline auto et
+    width fit-content etc me vient de ce topic :
+    https://stackoverflow.com/questions/1776915/how-can-i-center-an-absolutely-positioned-element-in-a-div */
 .ecran-accueil__porte-cliquable {
     position: absolute;
-    left: 35.9%;
-    top: 57.5%;
+    left: 0;
+    right: 0;
+    top: 56%;
+    margin-inline: auto;
+    width: fit-content;
     cursor: pointer;
     overflow: hidden;
+    filter: drop-shadow(0 15px 15px #E2CEB1)drop-shadow(0 30px 35px #E2CEB1);
 }
 
 .ecran-accueil__porte-cliquable img {
-    height: 40lvh;
-    width: 30.5vw;
-    object-fit: cover;
+    width: 32lvw;
+    max-width: 100%;
     transition: transform 1s;
 }
 
@@ -142,12 +184,19 @@ body {
     transform: translateY(-100%);
 }
 
+/* cet énorme bloc est celui qui sert de base pour afficher nos
+valeurs */
 .popup-info {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.8);
-    background: white;
+    background-image: url('../img/popup_fond.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 7px solid #bd1111;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(23, 23, 23);
     padding: 20px;
     width: 50vw;
     height: 50lvh;
@@ -161,10 +210,18 @@ body {
     pointer-events: none;
     text-align: center;
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-info__categorie {
+    border-top: #000 3px solid;
+    display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10lvw;
+    margin: 3px;
+    width: 45lvw;
 }
 
 .popup-info--visible {
@@ -233,13 +290,6 @@ body {
     transition: width 0.5s ease;
 }
 
-.cylindree-valeur {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: bold;
-    font-size: 0.8rem;
-    text-align: center;
-}
-
 .compteur {
     position: relative;
     width: 70px;
@@ -255,12 +305,12 @@ body {
 
 .compteur__aiguille {
     position: absolute;
-    bottom: 0;
-    left: 50%;
+    bottom: 48%;
+    left: 56%;
     width: 2px;
-    height: 25px;
+    height: 20px;
     background: red;
-    transform-origin: center top;
+    transform-origin: bottom;
     transition: transform 0.5s ease-out;
     z-index: 2;
 }
@@ -349,4 +399,133 @@ body {
     justify-content: center;
     white-space: nowrap;
     transition: width 0.5s ease;
+}
+
+/* on s'apperçoit ici que j'ai souvent mis une plus grosse largeur
+pour la porte de garage que nécéssaire, c'est parce que c'est un
+'hack' pour éviter de voir l'intérieur du garage et casser l'immersion
+pour les utilisateurs qui possédent des écrans étranges */
+/* le format choisi représente mon pc portable */
+@media (max-width: 1400px) {
+    .ecran-accueil__porte-cliquable {
+        top: 56%;
+        filter: drop-shadow(0 5px 5px #E2CEB1) drop-shadow(0 10px 25px #E2CEB1);
+    }
+
+    .ecran-accueil__porte-cliquable img {
+        width: 36lvw;
+    }
+}
+
+/* pc portable plus petit */
+@media (max-width: 1024px) {
+    .ecran-accueil__porte-cliquable {
+        top: 56%;
+        filter: drop-shadow(0 5px 5px #E2CEB1) drop-shadow(0 10px 25px #E2CEB1);
+    }
+
+    .ecran-accueil__porte-cliquable img {
+        width: 50lvw;
+    }
+
+    .garage__voiture {
+        width: 77lvw;
+        margin: auto;
+    }
+}
+
+/* tablette */
+@media (max-width: 768px) {
+    .garage__voiture {
+        width: 77lvw;
+        margin: auto;
+    }
+
+    .panneau-titre__nom {
+        font-size: 2rem;
+        white-space: wrap;
+        text-align: center;
+    }
+
+    .panneau__drapeau {
+        top: 100%;
+    }
+
+    .navigation__fleche svg {
+        width: 60px;
+    }
+
+    .navigation__fleche--droite {
+        right: 18px;
+    }
+
+    .navigation__fleche--gauche {
+        left: 18px;
+    }
+
+    .ecran-accueil__porte-cliquable {
+        top: 56%;
+        filter: drop-shadow(0 5px 5px #E2CEB1) drop-shadow(0 10px 25px #E2CEB1);
+    }
+
+    .ecran-accueil__porte-cliquable img {
+        width: 79lvw;
+    }
+}
+
+/* mobile */
+@media (max-width: 480px) {
+    body {
+        background-image: url('../img/background_mobile.jpg');
+    }
+
+    .ecran-accueil {
+        background-image: url(../img/background_landing_mobile.jpg);
+    }
+
+    .ecran-accueil__porte-cliquable {
+        top: 52%;
+        filter: drop-shadow(0 5px 5px #E2CEB1) drop-shadow(0 10px 25px #E2CEB1);
+    }
+
+    .ecran-accueil__porte-cliquable img {
+        width: 74lvw;
+    }
+
+    .panneau-titre__nom {
+        font-size: 1.2rem;
+        white-space: wrap;
+        text-align: center;
+    }
+
+    .panneau__drapeau {
+        top: 100%;
+    }
+
+    .panneau-titre__date {
+        left: -3%;
+        font-size: 0.8rem;
+        transform: rotate(3deg);
+    }
+
+    .garage__voiture {
+        width: 97lvw;
+        margin: auto;
+    }
+
+    .navigation__fleche {
+        top: 85%;
+    }
+
+    .navigation__fleche svg {
+        width: 100px;
+    }
+
+    .navigation__fleche--droite {
+        right: 50px;
+    }
+
+    .navigation__fleche--gauche {
+        left: 50px;
+    }
 }

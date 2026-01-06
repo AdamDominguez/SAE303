@@ -2,7 +2,7 @@ let cars = [];
 let currentIndex = 0;
 let nomVoiture = document.querySelector('.panneau-titre__nom');
 let dateVoiture = document.querySelector('.panneau-titre__date');
-let drapeau = document.querySelector('.garage__drapeau');
+let drapeau = document.querySelector('.panneau__drapeau');
 let imageVoiture = document.querySelector('.garage__voiture');
 let btnPrec = document.querySelector('.navigation__fleche--gauche');
 let btnSuiv = document.querySelector('.navigation__fleche--droite');
@@ -36,7 +36,7 @@ function afficherVoiture(index) {
     if (car.Origin) {
         origin = car.Origin.toLowerCase();
     }
-    drapeau.src = "public/img/flag/" + origin + ".jpg";
+    drapeau.src = "public/img/flag/" + origin + ".png";
 
     nomVoiture.textContent = car.Name.toUpperCase();
 
@@ -48,9 +48,17 @@ function afficherVoiture(index) {
     }
     dateVoiture.textContent = annee;
 
+    // très redondant, à modifier
     let fileName = car.Name.toLowerCase();
     fileName = fileName.replace(/ /g, '-');
     fileName = fileName.replace(/-+$/, '');
+    fileName = fileName.replace(/[(]/, '');
+    fileName = fileName.replace(/[/]/, '-');
+    fileName = fileName.replace(/[)]/, '');
+    fileName = fileName.replace(/[']/, '');
+    fileName = fileName.replace(/[@]/, 'a');
+    // !
+
     imageVoiture.src = "public/img/car/" + fileName + ".png";
 
     // MOTEUR

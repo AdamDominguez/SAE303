@@ -7,8 +7,12 @@
     <title>Adam's Garage</title>
     <link rel="stylesheet" href="public/style/main.css">
     <link rel="stylesheet" href="public/style/index.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/img/icons/ico32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/img/icons/ico16.png">
 </head>
 
+<!-- j'utilise la fameuse méthode BEM que j'ai pu voir en
+ alternance pour nommer mes classes ! -->
 <body>
     <div class="ecran-accueil">
         <div class="ecran-accueil__fond">
@@ -19,73 +23,102 @@
     </div>
 
     <div class="garage garage--cache">
-        <img class="garage__drapeau" src="" alt="Drapeau">
-
         <div class="panneau-titre">
-            <h1 class="panneau-titre__nom">NOM DE LA VOITURE</h1>
-            <div class="panneau-titre__date">0000</div>
+            <h1 class="panneau-titre__nom">GOLF IV</h1>
+            <div class="panneau-titre__date">2002</div>
+            <img class="panneau__drapeau" src="" alt="Drapeau">
         </div>
 
         <img class="garage__voiture" src="" alt="Voiture">
 
         <div class="popup-info">
-
-            <div class="popup-info__section popup-info__section--moteur">
-                <div class="popup-info__titre">MOTEUR</div>
-                <div class="moteur-visuel"></div>
-            </div>
-
-            <div class="popup-info__section popup-info__section--cylindree">
-                <div class="popup-info__titre">CYLINDRÉE</div>
-                <div class="cylindree-visuel">
-                    <svg width="100" height="60" viewBox="0 0 100 60" class="cylindree-svg">
-                        <rect x="10" y="10" width="80" height="40" fill="#ccc" stroke="#000" stroke-width="2" />
-                        <rect class="cylindree-svg__barre" x="10" y="10" width="0" height="40" fill="#002FFF" />
-                        <line x1="30" y1="10" x2="30" y2="50" stroke="#000" stroke-opacity="0.2" />
-                        <line x1="50" y1="10" x2="50" y2="50" stroke="#000" stroke-opacity="0.2" />
-                        <line x1="70" y1="10" x2="70" y2="50" stroke="#000" stroke-opacity="0.2" />
-                    </svg>
-                    <div class="cylindree-valeur">0 ci</div>
+            <!-- MOTEUR CATEG -->
+            <div class="popup-info__categorie">
+                <!-- MOTEUR VISUEL -->
+                <div class="popup-info__section popup-info__section--moteur">
+                    <div class="popup-info__titre">MOTEUR</div>
+                    <div class="moteur-visuel"></div>
                 </div>
-            </div>
 
-            <div class="popup-info__section popup-info__section--puissance">
-                <div class="popup-info__titre">CHEVAUX</div>
-                <div class="compteur">
-                    <div class="compteur__aiguille"></div>
-                    <div class="compteur__valeur">0 HP</div>
-                </div>
-            </div>
-
-            <div class="popup-info__section popup-info__section--acceleration">
-                <div class="popup-info__titre popup-info__titre--accel">0-60 MPH</div>
-                <div class="piste">
-                    <div class="piste__marqueur"></div>
-                </div>
-            </div>
-
-            <div class="popup-info__section popup-info__section--conso">
-                <div class="popup-info__titre">CONSOMMATION</div>
-                <div class="reservoir">
-                    <div class="reservoir__jauge">
-                        <span class="reservoir__texte">0 MPG</span>
-                        <div class="reservoir__liquide"></div>
+                <!-- CYLINDREE -->
+                <div class="popup-info__section popup-info__section--cylindree">
+                    <div class="popup-info__titre">CYLINDRÉE</div>
+                    <div class="cylindree-visuel">
+                        <svg width="100" height="60" viewBox="0 0 100 60" class="cylindree-svg">
+                            <rect x="10" y="10" width="80" height="40" fill="#ccc" stroke="#000" stroke-width="2" />
+                            <rect class="cylindree-svg__barre" x="10" y="10" width="0" height="40" fill="#002FFF" />
+                            <line x1="30" y1="10" x2="30" y2="50" stroke="#000" stroke-opacity="0.2" />
+                            <line x1="50" y1="10" x2="50" y2="50" stroke="#000" stroke-opacity="0.2" />
+                            <line x1="70" y1="10" x2="70" y2="50" stroke="#000" stroke-opacity="0.2" />
+                        </svg>
+                        <div class="cylindree-valeur">0 ci</div>
                     </div>
                 </div>
             </div>
 
-            <div class="popup-info__section popup-info__section--poids">
-                <div class="popup-info__titre">POIDS</div>
-                <div class="balance">
-                    <div class="balance__barre">0 LBS</div>
+            <!-- VITESSE CATEG -->
+            <div class="popup-info__categorie">
+                <!-- CHEVAUX -->
+                <div class="popup-info__section popup-info__section--puissance">
+                    <div class="popup-info__titre">CHEVAUX</div>
+                    <div class="compteur">
+                        <div class="compteur__aiguille"></div>
+                        <div class="compteur__valeur">0 HP</div>
+                    </div>
+                </div>
+
+                <!-- ACCELERATION -->
+                <div class="popup-info__section popup-info__section--acceleration">
+                    <div class="popup-info__titre popup-info__titre--accel">0-60 MPH</div>
+                    <div class="piste">
+                        <div class="piste__marqueur"></div>
+                    </div>
                 </div>
             </div>
 
+            <!-- DIVERS CATEG -->
+            <div class="popup-info__categorie">
+                <!-- ESSENCE -->
+                <div class="popup-info__section popup-info__section--conso">
+                    <div class="popup-info__titre">CONSOMMATION</div>
+                    <div class="reservoir">
+                        <div class="reservoir__jauge">
+                            <span class="reservoir__texte">0 MPG</span>
+                            <div class="reservoir__liquide"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POIDS -->
+                <div class="popup-info__section popup-info__section--poids">
+                    <div class="popup-info__titre">POIDS</div>
+                    <div class="balance">
+                        <div class="balance__barre">0 LBS</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <button class="navigation__fleche navigation__fleche--gauche">‹</button>
-    <button class="navigation__fleche navigation__fleche--droite">›</button>
+    <!-- fleche gauche -->
+    <button class="navigation__fleche navigation__fleche--gauche">
+        <svg xmlns="http://www.w3.org/2000/svg" width="122" height="121" viewBox="0 0 122 121" fill="none">
+            <g filter="url(#filter0_n_88_107)">
+                <path
+                    d="M121.363 37.3204L121.363 83.5851L60.0688 83.5851L60.0688 120.905L-2.64246e-06 60.4527L60.0688 0.00017599L60.0688 37.3204L121.363 37.3204Z" />
+            </g>
+        </svg>
+    </button>
+
+    <!-- fleche droite -->
+    <button class="navigation__fleche navigation__fleche--droite">
+        <svg xmlns="http://www.w3.org/2000/svg" width="122" height="121" viewBox="0 0 122 121" fill="none">
+            <g filter="url(#filter0_n_88_104)">
+                <path
+                    d="M-0.000208146 83.5849L-0.000206124 37.3202L61.2945 37.3202L61.2945 -2.62569e-06L121.363 60.4525L61.2945 120.905L61.2945 83.5849L-0.000208146 83.5849Z" />
+            </g>
+        </svg>
+    </button>
 
     <script src="script/data.js"></script>
     <script src="script/landing.js"></script>
