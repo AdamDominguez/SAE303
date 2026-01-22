@@ -1,4 +1,5 @@
-body {
+body,
+body.usa {
     background-image: url('../img/background.jpg');
     background-size: cover;
     background-position: center;
@@ -8,6 +9,15 @@ body {
     width: 100vw;
     overflow: hidden;
     margin: 0;
+    transition: background-image 0.8s ease-in-out;
+}
+
+body.japan {
+    background-image: url('../img/backgroundjapon.jpg');
+}
+
+body.europe {
+    background-image: url('../img/backgroundeurope.jpg');
 }
 
 .garage {
@@ -40,6 +50,7 @@ body {
     width: 55lvw;
     margin-top: auto;
     pointer-events: auto;
+    /* transition: 0.8s ease-in-out; */
 }
 
 .panneau-titre {
@@ -54,7 +65,7 @@ body {
     display: flex;
     justify-content: center;
     pointer-events: auto;
-    margin: 40px;
+    margin: 40px auto;
     max-width: 100%;
 }
 
@@ -184,44 +195,54 @@ clignotants ! */
     transform: translateY(-100%);
 }
 
-/* cet énorme bloc est celui qui sert de base pour afficher nos
-valeurs */
 .popup-info {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
+    max-width: 100%;
+    width: auto;
     background-image: url('../img/popup_fond.jpg');
     background-size: cover;
-    background-position: center;
-    border: 7px solid #bd1111;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgb(23, 23, 23);
-    padding: 20px;
-    width: 50vw;
-    height: 50lvh;
-    max-height: 100%;
-    max-width: 100%;
-    overflow-y: auto;
+    border: 4px solid #bd1111;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    padding: 25px 15px;
     z-index: 50;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
-    pointer-events: none;
-    text-align: center;
+    transition: all 0.3s;
+}
+
+.popup-info__main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 100%;
+    gap: 20px;
 }
 
 .popup-info__categorie {
-    border-top: #000 3px solid;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 15px 0;
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+    gap: 20px;
+}
+
+.popup-info__categorie:first-child {
+    border-top: none;
+}
+
+.popup-info__section {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10lvw;
-    margin: 3px;
-    width: 45lvw;
+    min-width: 100px;
+    flex: 1;
+    margin: 5px;
 }
 
 .popup-info--visible {
@@ -231,10 +252,14 @@ valeurs */
 }
 
 .popup-info__titre {
-    font-weight: bold;
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #bd1111;
+    color: #333;
+    padding-bottom: 2px;
 }
 
 .moteur-visuel {
@@ -401,6 +426,82 @@ valeurs */
     transition: width 0.5s ease;
 }
 
+.garage__haut {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.garage__pays {
+    transform: translateY(-5lvh);
+    display: flex;
+}
+
+.garage__pays.pays {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    background-color: #000;
+    opacity: 85%;
+    padding: 3px;
+    width: 20lvw;
+    color: white;
+    margin: 0 5lvw;
+}
+
+.garage__pays.pays.usa {
+    transform: translateY(1lvh);
+}
+
+.garage__pays.pays:hover {
+    color: wheat;
+    transition: border .2s ease-in-out;
+}
+
+.garage_pays.pays img {
+    max-width: 100%;
+    width: 5lvw;
+}
+
+.cylindree-svg__piston {
+    animation: coursePiston 0.8s infinite ease-in-out;
+}
+
+@keyframes coursePiston {
+
+    0%,
+    100% {
+        transform: translateY(-5px);
+    }
+
+    50% {
+        transform: translateY(20px);
+    }
+}
+
+.cylindree-svg__explosion {
+    opacity: 0;
+    animation: flashCycle 0.8s infinite step-end;
+}
+
+@keyframes flashCycle {
+
+    0%,
+    100% {
+        opacity: 1;
+        filter: brightness(1.3) drop-shadow(0 0 8px orange);
+    }
+
+    15%,
+    85% {
+        opacity: 0;
+    }
+}
+
 /* on s'apperçoit ici que j'ai souvent mis une plus grosse largeur
 pour la porte de garage que nécéssaire, c'est parce que c'est un
 'hack' pour éviter de voir l'intérieur du garage et casser l'immersion
@@ -417,7 +518,6 @@ pour les utilisateurs qui possédent des écrans étranges */
     }
 }
 
-/* pc portable plus petit */
 @media (max-width: 1024px) {
     .ecran-accueil__porte-cliquable {
         top: 56%;
@@ -431,6 +531,17 @@ pour les utilisateurs qui possédent des écrans étranges */
     .garage__voiture {
         width: 77lvw;
         margin: auto;
+    }
+
+    .garage__pays.pays {
+        font-size: small;
+        transform: translateY(-60lvh);
+        scale: 0.9;
+    }
+
+    .garage__pays.pays.usa {
+        font-size: small;
+        transform: translateY(-55lvh);
     }
 }
 
@@ -470,6 +581,61 @@ pour les utilisateurs qui possédent des écrans étranges */
 
     .ecran-accueil__porte-cliquable img {
         width: 79lvw;
+    }
+
+    .garage__pays.pays {
+        font-size: smaller;
+        scale: 0.8;
+        transform: translateY(-80lvh);
+    }
+
+    .garage__pays.pays.usa {
+        font-size: small;
+        transform: translateY(-60lvh);
+    }
+
+    .popup-info__categorie {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0;
+        border-top: 2px solid rgba(0, 0, 0, 0.2);
+        gap: 2px;
+    }
+
+    .popup-info__section {
+        min-width: 0;
+        margin: 0;
+    }
+
+    .moteur-visuel {
+        transform: scale(0.7);
+    }
+
+    .cylindree-visuel {
+        transform: scale(0.7);
+    }
+
+    .compteur {
+        transform: scale(0.7);
+    }
+
+    .reservoir {
+        transform: scale(0.7);
+    }
+
+    .piste {
+        transform: scale(0.7)
+    }
+
+    .poids {
+        transform: scale(0.7);
+    }
+
+    .balance {
+        transform: scale(0.7);
     }
 }
 
@@ -527,5 +693,26 @@ pour les utilisateurs qui possédent des écrans étranges */
 
     .navigation__fleche--gauche {
         left: 50px;
+    }
+
+    .garage__pays.pays {
+        font-size: small;
+        scale: 0.7;
+        width: 15lvh;
+        margin: 0;
+    }
+
+    .garage__pays.pays.usa {
+        font-size: small;
+        transform: translateY(-80lvh);
+    }
+
+    .popup-info__main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+        width: 80lvw;
+        gap: 1px;
     }
 }
